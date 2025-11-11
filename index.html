@@ -2,11 +2,18 @@
 <html lang="en" class="text-gray-900 bg-gray-100">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale-1" />
 <title>Pediatric Acute Intermittent PD – 5-Day Plan (Editable)</title>
 <!-- Loading Tailwind CSS from CDN -->
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
+  /* Custom class to show spans only during print */
+  .print-only {
+    display: none;
+    font-size: 7pt !important; /* Match print styles */
+    word-wrap: break-word; /* Ensure long text wraps */
+  }
+
   /* Custom styles for printing */
   @media print {
     /* Define A4 page size and margins */
@@ -23,10 +30,26 @@
       print-color-adjust: exact;
     }
 
+    /* Hide screen elements */
     .no-print {
       display: none !important;
     }
     
+    /* Hide inputs/selects inside the table during print */
+    .no-print-in-cell {
+      display: none !important;
+    }
+    
+    /* Show the print-only spans */
+    .print-only {
+      display: block !important;
+    }
+
+    /* Ensure print cells have a minimum height even if empty */
+    tbody td {
+        min-height: 1.5em; /* Provides space for blank cells */
+    }
+
     /* Remove max-width and outer padding for print */
     .max-w-7xl {
       max-width: 100% !important;
@@ -352,6 +375,63 @@
   // Table body
   const tbody = document.querySelector('#pdTable tbody');
 
+  // --- NEW: Print Handling ---
+  
+  function updatePrintSpans() {
+    [...tbody.querySelectorAll('tr')].forEach(tr => {
+      // Date
+      const dateInput = tr.querySelector('input.date');
+      const dateSpan = tr.querySelector('.date-print');
+      if(dateInput && dateSpan) {
+        // Format date for printing if value exists
+        if (dateInput.value) {
+            // Use UTC functions to avoid timezone issues with date-only inputs
+            const d = new Date(dateInput.value);
+            const yyyy = d.getUTCFullYear();
+            const mm = String(d.getUTCMonth() + 1).padStart(2, '0');
+            const dd = String(d.getUTCDate()).padStart(2, '0');
+            dateSpan.textContent = `${yyyy}-${mm}-${dd}`;
+        } else {
+            dateSpan.textContent = '';
+        }
+      }
+
+      // Rule
+      const ruleInput = tr.querySelector('input.rule');
+      const ruleSpan = tr.querySelector('.rule-print');
+      if(ruleInput && ruleSpan) ruleSpan.textContent = ruleInput.value;
+      
+      // Volume
+      const volInput = tr.querySelector('input.vol');
+      const volSpan = tr.querySelector('.vol-print');
+      if(volInput && volSpan) volSpan.textContent = volInput.value;
+
+      // Dextrose
+      const dexSelect = tr.querySelector('select.dex');
+      const dexSpan = tr.querySelector('.dex-print');
+      if(dexSelect && dexSpan) dexSpan.textContent = dexSelect.value;
+      
+      // Medication
+      const medInput = tr.querySelector('input.medication');
+      const medSpan = tr.querySelector('.med-print');
+      if(medInput && medSpan) medSpan.textContent = medInput.value;
+
+      // Dosage
+      const dosageInput = tr.querySelector('input.dosage');
+      const dosageSpan = tr.querySelector('.dosage-print');
+      if(dosageInput && dosageSpan) dosageSpan.textContent = dosageInput.value;
+      
+      // Notes
+      const notesInput = tr.querySelector('input.notes-input');
+      const notesSpan = tr.querySelector('.notes-print');
+      if(notesInput && notesSpan) notesSpan.textContent = notesInput.value;
+    });
+  }
+  
+  // Attach print event listeners
+  window.addEventListener('beforeprint', updatePrintSpans);
+
+
   // --- Utility Functions ---
   
   function toLocalDT(d){
@@ -400,10 +480,14 @@
       const ruleText = (day===1) ? '20 mL/kg' : (day===2) ? '30 mL/kg' : '40 mL/kg';
 
       // Re-usable function for creating cells and inputs
-      const createCell = (content) => {
+      const createCell = (contentList) => { // Modified to accept an array
         const td = document.createElement('td');
         td.className = 'whitespace-nowrap px-3 py-2 text-sm text-gray-900';
-        if (content) td.appendChild(content);
+        if (contentList && Array.isArray(contentList)) {
+          contentList.forEach(el => td.appendChild(el));
+        } else if (contentList) {
+          td.appendChild(contentList);
+        }
         return td;
       };
       
@@ -411,8 +495,17 @@
         const input = document.createElement('input');
         input.type = type;
         input.placeholder = placeholder || '';
-        input.className = `w-full border-gray-300 rounded-md shadow-sm sm:text-sm focus:border-blue-500 focus:ring-blue-500 ${className || ''}`;
+        // Added no-print-in-cell class
+        input.className = `w-full border-gray-300 rounded-md shadow-sm sm:text-sm focus:border-blue-500 focus:ring-blue-500 ${className || ''} no-print-in-cell`;
         return input;
+      };
+
+      // Helper to create the print-span
+      const createPrintSpan = (className) => {
+          const span = document.createElement('span');
+          // Added print-only class
+          span.className = `print-only ${className || ''}`; 
+          return span;
       };
 
       // Day #
@@ -423,21 +516,25 @@
 
       // Date
       const dateInput = createInput('date', 'date', '');
-      tr.appendChild(createCell(dateInput));
+      const dateSpan = createPrintSpan('date-print');
+      tr.appendChild(createCell([dateInput, dateSpan]));
 
       // Rule
       const ruleInput = createInput('text', 'rule', ruleText);
       ruleInput.value = ruleText;
-      tr.appendChild(createCell(ruleInput));
+      const ruleSpan = createPrintSpan('rule-print');
+      tr.appendChild(createCell([ruleInput, ruleSpan]));
 
       // Total fill volume (mL)
       const volInput = createInput('number', 'vol num', 'mL');
       volInput.step = '1'; volInput.min = '0';
-      tr.appendChild(createCell(volInput));
+      const volSpan = createPrintSpan('vol-print');
+      tr.appendChild(createCell([volInput, volSpan]));
 
       // Dextrose %
       const sel = document.createElement('select');
-      sel.className = 'dex pct w-full border-gray-300 rounded-md shadow-sm sm:text-sm focus:border-blue-500 focus:ring-blue-500';
+      // Added no-print-in-cell class
+      sel.className = 'dex pct w-full border-gray-300 rounded-md shadow-sm sm:text-sm focus:border-blue-500 focus:ring-blue-500 no-print-in-cell';
       ['Select','1.5%','2.5%','4.25%'].forEach(v=>{
         const opt = document.createElement('option'); 
         opt.textContent=v; 
@@ -445,18 +542,25 @@
         sel.appendChild(opt);
       });
       sel.value = '1.5%'; // Default to 1.5%
-      tr.appendChild(createCell(sel));
+      const selSpan = createPrintSpan('dex-print');
+      tr.appendChild(createCell([sel, selSpan]));
 
       // Medications (IP) - Updated
       const medInput = createInput('text', 'medication', 'e.g., Cefazolin...');
       medInput.setAttribute('list', 'medicationList'); // Link to datalist
-      tr.appendChild(createCell(medInput));
+      const medSpan = createPrintSpan('med-print');
+      tr.appendChild(createCell([medInput, medSpan]));
       
       // DOSAGE CELL
-      tr.appendChild(createCell(createInput('text', 'dosage', 'e.g., 125mg')));
+      const dosageInput = createInput('text', 'dosage', 'e.g., 125mg');
+      const dosageSpan = createPrintSpan('dosage-print');
+      tr.appendChild(createCell([dosageInput, dosageSpan]));
 
       // Notes
-      tr.appendChild(createCell(createInput('text', '', 'Notes')));
+      // Added 'notes-input' class for easier selection
+      const notesInput = createInput('text', 'notes-input', 'Notes');
+      const notesSpan = createPrintSpan('notes-print');
+      tr.appendChild(createCell([notesInput, notesSpan]));
 
       tbody.appendChild(tr);
     }
@@ -518,7 +622,7 @@ function recalcAll(){
       
       // Flag user-edited cells to prevent auto-overwriting
       // Added 'input.medication' to the list
-      const editedClasses = ['input.date', 'input.vol', 'input.rule', 'input.dosage', 'input.medication'];
+      const editedClasses = ['input.date', 'input.vol', 'input.rule', 'input.dosage', 'input.medication', 'input.notes-input'];
       if (editedClasses.some(cls => el.matches(cls))) {
         el.dataset.userEdited = "1";
       }
