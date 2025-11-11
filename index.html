@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en" class="text-gray-900 bg-gray-100">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Pediatric Acute Intermittent PD – 5-Day Plan (Editable)</title>
+<!-- Loading Tailwind CSS from CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  /* Custom styles for printing */
+  @media print {
+    /* Define A4 page size and margins */
+    @page {
+      size: A4;
+      margin: 1cm; /* Reduced margins */
+    }
+
+    body {
+      background-color: white !important;
+      font-size: 9pt; /* Reduced base font size */
+      color: black;
+    }
+
+    .no-print {
+      display: none !important;
+    }
+    
+    /* Remove max-width and outer padding for print */
+    .max-w-7xl {
+      max-width: 100% !important;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+
+    /* Adjust card for printing */
+    .print-card {
+      border: none !important;
+      box-shadow: none !important;
+      padding: 0 !important;
+    }
+    
+    /* --- TYPOGRAPHY --- */
+    h1 {
+      font-size: 16pt !important; /* Reduced */
+      margin-bottom: 0.25rem !important;
+    }
+    h2 {
+      font-size: 12pt !important; /* Reduced */
+      margin-top: 0.75rem !important; /* Reduced */
+      margin-bottom: 0.25rem !important; /* Reduced */
+      padding-bottom: 0.25rem !important;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    /* Page description text */
+    .mt-1.text-sm.text-gray-500 {
+      font-size: 8pt !important; /* Reduced */
+      color: #374151 !important;
+    }
+    label {
+      font-size: 8pt !important; /* Reduced */
+      margin-bottom: 1px !important; /* Reduced */
+    }
+    /* Helper text */
+    .mt-1.text-xs.text-gray-500,
+    .mt-4.text-sm.text-gray-600 p {
+      font-size: 7pt !important; /* Reduced */
+      color: #4b5563 !important;
+    }
+    
+    /* --- LAYOUT --- */
+    .grid {
+      gap: 0.5rem 1rem !important; /* Reduced y-gap */
+    }
+    .mt-6.border-t {
+      margin-top: 0.75rem !important; /* Reduced */
+      padding-top: 0.75rem !important; /* Reduced */
+    }
+
+    /* --- FORM ELEMENTS --- */
+    input, select {
+      border: 1px solid #d1d5db !important;
+      padding: 3px 5px !important; /* Reduced padding */
+      font-size: 8pt !important; /* Reduced */
+      margin-top: 0 !important;
+    }
+    input[readonly] {
+      background-color: #f9fafb !important;
+      color: #374151 !important;
+    }
+
+    /* --- TABLE --- */
+    table {
+      width: 100%;
+      border-collapse: collapse !important;
+    }
+    /* Override all Tailwind padding/font classes in table */
+    thead th, tbody td {
+      padding: 4px 6px !important; /* Reduced padding */
+      font-size: 8pt !important; /* Reduced */
+      border: 1px solid #d1d5db !important;
+      vertical-align: top;
+    }
+    thead th {
+      font-size: 7pt !important; /* Reduced */
+      font-weight: 600 !important;
+      text-transform: uppercase !important;
+      background-color: #f9fafb !important;
+    }
+    /* Make table inputs blend a bit better */
+    table input, table select {
+      padding: 3px 5px !important;
+      font-size: 8pt !important; /* Reduced */
+    }
+
+    /* --- FOOTER --- */
+    footer {
+      display: block !important;
+      text-align: center !important;
+      margin-top: 1rem !important; /* Reduced */
+      padding-top: 0.25rem !important; /* Reduced */
+      border-top: 1px solid #e5e7eb;
+      font-size: 7pt !important; /* Reduced */
+      color: #374151 !important;
+    }
+  }
+</style>
+</head>
+<body class="antialiased">
+
+<div class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
+  <!-- Main Card -->
+  <div class="bg-white rounded-xl shadow-lg p-6 print-card">
+    
+    <!-- Header -->
+    <div>
+      <h1 class="text-2xl font-bold text-gray-900">Pediatric Acute Intermittent PD – 5-Day Plan</h1>
+      <p class="mt-1 text-sm text-gray-500">Auto-calculates fill volume and eGFR (Schwartz). All fields are editable.</p>
+    </div>
+
+    <!-- Patient Demographics -->
+    <div class="mt-6 border-t border-gray-200 pt-6">
+      <h2 class="text-lg font-medium text-gray-700">Patient Demographics</h2>
+      <div class="mt-4 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+        
+        <div class="sm:col-span-3">
+          <label for="ptName" class="block text-sm font-medium text-gray-700">Patient Name</label>
+          <input type="text" id="ptName" placeholder="Enter patient name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
+        </div>
+
+        <div class="sm:col-span-3">
+          <label for="mrn" class="block text-sm font-medium text-gray-700">MRN / ID</label>
+          <input type="text" id="mrn" placeholder="Optional" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
+        </div>
+
+        <div class="sm:col-span-2">
+          <label for="ptAge" class="block text-sm font-medium text-gray-700">Age (Years)</label>
+          <input type="number" step="0.1" min="0" id="ptAge" placeholder="e.g., 5.5" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
+        </div>
+        
+        <div class="sm:col-span-2">
+          <label for="ptSex" class="block text-sm font-medium text-gray-700">Sex</label>
+          <select id="ptSex" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
+            <option value="">Select</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <!-- Weight and Height are now 1-column each to fit on the same line -->
+        <div class="sm:col-span-1">
+          <label for="wt" class="block text-sm font-medium text-gray-700">Weight (kg)</label>
+          <input type="number" step="0.1" min="0" id="wt" placeholder="e.g., 8.5" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
+        </div>
+
+        <!-- Height moved here -->
+        <div class="sm:col-span-1">
+          <label for="ptHeight" class="block text-sm font-medium text-gray-700">Height (cm)</label>
+          <input type="number" step="0.1" min="0" id="ptHeight" placeholder="e.g., 70.5" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
+        </div>
+      </div>
+    </div>
+
+    <!-- Labs & Renal Function -->
+    <div class="mt-6 border-t border-gray-200 pt-6">
+      <h2 class="text-lg font-medium text-gray-700">Labs & Renal Function</h2>
+      <!-- Grid updated to sm:grid-cols-6 for balance -->
+      <div class="mt-4 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+        
+        <!-- Spans updated to 2-columns each -->
+        <div class="sm:col-span-2">
+          <label for="bloodUrea" class="block text-sm font-medium text-gray-700">Blood Urea (mg/dL)</label>
+          <input type="number" step="0.1" min="0" id="bloodUrea" placeholder="e.g., 40" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
+        </div>
+
+        <div class="sm:col-span-2">
+          <label for="serumCreatinine" class="block text-sm font-medium text-gray-700">Serum Creatinine (mg/dL)</label>
+          <input type="number" step="0.01" min="0" id="serumCreatinine" placeholder="e.g., 1.2" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
+        </div>
+
+        <div class="sm:col-span-2">
+          <label for="eGFR" class="block text-sm font-medium text-gray-700">eGFR (Schwartz)</label>
+          <input type="text" id="eGFR" readonly class="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm bg-gray-100 text-gray-700 font-medium" placeholder="mL/min/1.73m²">
+          <p class="mt-1 text-xs text-gray-500">eGFR = (0.413 * Height) / Cr</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Timing & Actions -->
+    <div class="mt-6 border-t border-gray-200 pt-6">
+      <h2 class="text-lg font-medium text-gray-700">PD Plan Timing & Actions</h2>
+      <div class="mt-4 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+        
+        <div class="sm:col-span-2">
+          <label for="startDT" class="block text-sm font-medium text-gray-700">Start Date & Time</label>
+          <input type="datetime-local" id="startDT" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
+        </div>
+
+        <div class="sm:col-span-2">
+          <label for="endDT" class="block text-sm font-medium text-gray-700">Computed End Time (5 days)</label>
+          <input type="datetime-local" id="endDT" readonly class="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm bg-gray-100">
+        </div>
+
+        <div class="sm:col-span-2 flex items-end gap-x-3 no-print">
+          <button type="button" id="clearBtn" class="inline-flex justify-center w-full rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+            Clear All
+          </button>
+          <button type="button" onclick="window.print()" class="inline-flex justify-center w-full rounded-md border border-transparent bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+            Print Plan
+          </button>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Daily Plan Table -->
+    <div class="mt-6 border-t border-gray-200 pt-6">
+      <h2 class="text-lg font-medium text-gray-700">Daily Plan (Editable)</h2>
+      <div class="mt-4 flex flex-col">
+        <div class="-my-2 -mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+            <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
+              <table id="pdTable" class="min-w-full divide-y divide-gray-200" aria-label="PD Plan Table">
+                <thead class="bg-gray-50">
+                  <tr>
+                    <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500 sm:pl-6">Day</th>
+                    <th scope="col" class="px-3 py-3.5 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Date</th>
+                    <th scope="col" class="px-3 py-3.5 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Fill Volume Rule</th>
+                    <th scope="col" class="px-3 py-3.5 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Total Fill (mL)</th>
+                    <th scope="col" class="px-3 py-3.5 text-left text-xs font-medium uppercase tracking-wider text-gray-s500">Dextrose %</th>
+                    <!-- Renamed Column -->
+                    <th scope="col" class="px-3 py-3.5 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Medications</th>
+                    <th scope="col" class="px-3 py-3.5 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Dosage</th>
+                    <th scope="col" class="px-3 py-3.5 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Notes</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200 bg-white">
+                  <!-- Rows generated by JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mt-4 text-sm text-gray-600">
+        <p>• Fill volume <em>(per exchange)</em> is calculated from weight × rule (20/30/40 mL/kg) and is fully editable.</p>
+        <p>• Choose dextrose according to ultrafiltration needs; enter IP medications per local protocol.</p>
+      </div>
+    </div>
+
+  </div> <!-- End Main Card -->
+</div> <!-- End Max-w container -->
+
+<!-- Footer visible on screen and print -->
+<footer class="py-8 text-center">
+  <p class="text-xs text-gray-500 print:text-gray-900 print:font-normal">
+    Done by Dr. Haider Samer
+  </p>
+</footer>
+
+<!-- Datalist for medication suggestions -->
+<datalist id="medicationList">
+  <!-- A. Antibiotics -->
+  <option value="Cefazolin"></option>
+  <option value="Ceftazidime"></option>
+  <option value="Cefepime"></option>
+  <option value="Vancomycin"></option>
+  <option value="Gentamicin"></option>
+  <option value="Amikacin"></option>
+  <option value="Meropenem"></option>
+  <option value="Clindamycin"></option>
+  <option value="Piperacillin–Tazobactam"></option>
+  
+  <!-- B. Antifungal Agents -->
+  <option value="Amphotericin B"></option>
+  <option value="Fluconazole"></option> <!-- Corrected typo here -->
+  
+  <!-- C. Anticoagulant -->
+  <option value="Heparin"></option>
+  
+  <!-- D. Hormonal / Metabolic Agents -->
+  <option value="Insulin"></option>
+  
+  <!-- E. Chemotherapy -->
+  <option value="Cisplatin"></option>
+  <option value="Mitomycin-C"></option>
+  <option value="Doxorubicin"></option>
+</datalist>
+
+<script>
+(function(){
+  // Main form elements
+  const wtEl = document.getElementById('wt');
+  const startEl = document.getElementById('startDT');
+  const endEl = document.getElementById('endDT');
+  const clearBtn = document.getElementById('clearBtn');
+  
+  // Renal function elements
+  const heightEl = document.getElementById('ptHeight');
+  const creatinineEl = document.getElementById('serumCreatinine');
+  const egfrEl = document.getElementById('eGFR');
+
+  // Table body
+  const tbody = document.querySelector('#pdTable tbody');
+
+  // --- Utility Functions ---
+  
+  function toLocalDT(d){
+    const pad = n=> String(n).padStart(2,'0');
+    const yyyy = d.getFullYear();
+    const mm = pad(d.getMonth()+1);
+    const dd = pad(d.getDate());
+    const hh = pad(d.getHours());
+    const mi = pad(d.getMinutes());
+    return `${yyyy}-${mm}-${dd}T${hh}:${mi}`;
+  }
+
+  function addDays(date, n){
+    const d = new Date(date);
+    d.setDate(d.getDate()+n);
+    return d;
+  }
+  
+  function parseRuleMlPerKg(text){
+    if(!text) return NaN;
+    const m = String(text).match(/(\d+(?:\.\d+)*)/);
+    return m ? parseFloat(m[1]) : NaN;
+  }
+
+  // --- Core Calculation Functions ---
+  
+  function calculateRenalFunction() {
+    const height_cm = parseFloat(heightEl.value);
+    const creatinine_mg_dl = parseFloat(creatinineEl.value);
+    
+    if (height_cm > 0 && creatinine_mg_dl > 0) {
+      // Bedside Schwartz formula
+      const egfr = (0.413 * height_cm) / creatinine_mg_dl;
+      egfrEl.value = `${egfr.toFixed(2)} mL/min/1.73m²`;
+    } else {
+      egfrEl.value = '';
+    }
+  }
+
+  function buildRows(){
+    tbody.innerHTML = '';
+    for(let day=1; day<=5; day++){
+      const tr = document.createElement('tr');
+      tr.className = 'even:bg-gray-50';
+
+      const ruleText = (day===1) ? '20 mL/kg' : (day===2) ? '30 mL/kg' : '40 mL/kg';
+
+      // Re-usable function for creating cells and inputs
+      const createCell = (content) => {
+        const td = document.createElement('td');
+        td.className = 'whitespace-nowrap px-3 py-2 text-sm text-gray-900';
+        if (content) td.appendChild(content);
+        return td;
+      };
+      
+      const createInput = (type, className, placeholder) => {
+        const input = document.createElement('input');
+        input.type = type;
+        input.placeholder = placeholder || '';
+        input.className = `w-full border-gray-300 rounded-md shadow-sm sm:text-sm focus:border-blue-500 focus:ring-blue-500 ${className || ''}`;
+        return input;
+      };
+
+      // Day #
+      const tdDay = document.createElement('td');
+      tdDay.className = 'whitespace-nowrap py-3 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6';
+      tdDay.textContent = day;
+      tr.appendChild(tdDay);
+
+      // Date
+      const dateInput = createInput('date', 'date', '');
+      tr.appendChild(createCell(dateInput));
+
+      // Rule
+      const ruleInput = createInput('text', 'rule', ruleText);
+      ruleInput.value = ruleText;
+      tr.appendChild(createCell(ruleInput));
+
+      // Total fill volume (mL)
+      const volInput = createInput('number', 'vol num', 'mL');
+      volInput.step = '1'; volInput.min = '0';
+      tr.appendChild(createCell(volInput));
+
+      // Dextrose %
+      const sel = document.createElement('select');
+      sel.className = 'dex pct w-full border-gray-300 rounded-md shadow-sm sm:text-sm focus:border-blue-500 focus:ring-blue-500';
+      ['Select','1.5%','2.5%','4.25%'].forEach(v=>{
+        const opt = document.createElement('option'); 
+        opt.textContent=v; 
+        opt.value=v==='Select'?'':v; 
+        sel.appendChild(opt);
+      });
+      sel.value = '1.5%'; // Default to 1.5%
+      tr.appendChild(createCell(sel));
+
+      // Medications (IP) - Updated
+      const medInput = createInput('text', 'medication', 'e.g., Cefazolin...');
+      medInput.setAttribute('list', 'medicationList'); // Link to datalist
+      tr.appendChild(createCell(medInput));
+      
+      // DOSAGE CELL
+      tr.appendChild(createCell(createInput('text', 'dosage', 'e.g., 125mg')));
+
+      // Notes
+      tr.appendChild(createCell(createInput('text', '', 'Notes')));
+
+      tbody.appendChild(tr);
+    }
+  }
+
+function recalcAll(){
+    const wt = parseFloat(wtEl.value);
+    
+    // 1. Compute endDT = start + 5 days
+    const startVal = startEl.value ? new Date(startEl.value) : null;
+    if(startVal){
+      const end = addDays(startVal, 5);
+      endEl.value = toLocalDT(end);
+      
+      // 2. Set per-day calendar dates
+      [...tbody.querySelectorAll('tr')].forEach((tr,idx)=>{
+        const dateInput = tr.querySelector('input.date');
+        if (!dateInput.dataset.userEdited) { // Only if user hasn't touched it
+          const d = addDays(startVal, idx); // day 0..4
+          const yyyy = d.getFullYear();
+          const mm = String(d.getMonth()+1).padStart(2,'0');
+          const dd = String(d.getDate()).padStart(2,'0');
+          dateInput.value = `${yyyy}-${mm}-${dd}`; 
+        }
+      });
+    } else {
+      endEl.value = '';
+    }
+
+    // 3. Propagate weight and recalculate volumes
+    [...tbody.querySelectorAll('tr')].forEach((tr,idx)=>{
+      const rule = tr.querySelector('input.rule').value;
+      const mlPerKg = parseRuleMlPerKg(rule);
+      const volInput = tr.querySelector('input.vol');
+      
+      // Use the MAIN weight (wt) for calculation
+      if(!isNaN(wt) && !isNaN(mlPerKg)){
+        const vol = Math.round(wt * mlPerKg);
+        // Only update volume if it hasn't been manually edited
+        if(!volInput.dataset.userEdited){ 
+          volInput.value = vol.toString(); 
+        }
+      }
+    });
+  }
+
+  function attachListeners(){
+    // Listen to main form inputs
+    wtEl.addEventListener('input', recalcAll);
+    startEl.addEventListener('change', recalcAll);
+
+    // Listen to renal function inputs
+    heightEl.addEventListener('input', calculateRenalFunction);
+    creatinineEl.addEventListener('input', calculateRenalFunction); 
+
+    // Listen to table inputs
+    tbody.addEventListener('input', (e)=>{
+      const el = e.target;
+      
+      // Flag user-edited cells to prevent auto-overwriting
+      // Added 'input.medication' to the list
+      const editedClasses = ['input.date', 'input.vol', 'input.rule', 'input.dosage', 'input.medication'];
+      if (editedClasses.some(cls => el.matches(cls))) {
+        el.dataset.userEdited = "1";
+      }
+
+      // If a rule changes, trigger a recalc
+      if(el.matches('input.rule')){
+        recalcAll();
+      }
+    });
+    
+    // Clear button
+    clearBtn.addEventListener('click', ()=>{
+      // Clear main form
+      document.getElementById('ptName').value='';
+      document.getElementById('mrn').value='';
+      document.getElementById('ptAge').value='';
+      document.getElementById('ptSex').value='';
+      wtEl.value='';
+      heightEl.value='';
+      document.getElementById('bloodUrea').value=''; 
+      creatinineEl.value='';
+      egfrEl.value='';
+      startEl.value='';
+      endEl.value='';
+      
+      // Rebuild and recalc table
+      buildRows();
+      initDefaults(); // Resets start time
+      recalcAll();
+    });
+  }
+
+  function initDefaults(){
+    // default start = now rounded to nearest 10 minutes
+    const now = new Date();
+    now.setMinutes(Math.round(now.getMinutes()/10)*10,0,0);
+    startEl.value = toLocalDT(now);
+  }
+
+  function init(){
+    buildRows();
+    attachListeners();
+    initDefaults(); // Set default start time
+    recalcAll(); // Initial calculation on load
+  }
+
+  // Run on load
+  init();
+})();
+</script>
+</body>
+</html>
