@@ -12,13 +12,15 @@
     /* Define A4 page size and margins */
     @page {
       size: A4;
-      margin: 1cm; /* Reduced margins */
+      margin: 0.75cm; /* Further reduced margins */
     }
 
     body {
       background-color: white !important;
-      font-size: 9pt; /* Reduced base font size */
+      font-size: 8pt; /* Further reduced base font size */
       color: black;
+      -webkit-print-color-adjust: exact; /* Force background colors in Chrome */
+      print-color-adjust: exact;
     }
 
     .no-print {
@@ -41,86 +43,113 @@
     
     /* --- TYPOGRAPHY --- */
     h1 {
-      font-size: 16pt !important; /* Reduced */
-      margin-bottom: 0.25rem !important;
+      font-size: 15pt !important; /* Reduced */
+      margin-bottom: 0.2rem !important;
     }
     h2 {
-      font-size: 12pt !important; /* Reduced */
-      margin-top: 0.75rem !important; /* Reduced */
-      margin-bottom: 0.25rem !important; /* Reduced */
-      padding-bottom: 0.25rem !important;
+      font-size: 11pt !important; /* Reduced */
+      margin-top: 0.5rem !important; /* Reduced */
+      margin-bottom: 0.2rem !important; /* Reduced */
+      padding-bottom: 0.2rem !important;
       border-bottom: 1px solid #e5e7eb;
     }
     /* Page description text */
     .mt-1.text-sm.text-gray-500 {
-      font-size: 8pt !important; /* Reduced */
+      font-size: 7pt !important; /* Reduced */
       color: #374151 !important;
     }
     label {
-      font-size: 8pt !important; /* Reduced */
-      margin-bottom: 1px !important; /* Reduced */
+      font-size: 7pt !important; /* Reduced */
+      margin-bottom: 0px !important; /* Reduced */
+      font-weight: 600 !important;
     }
     /* Helper text */
     .mt-1.text-xs.text-gray-500,
     .mt-4.text-sm.text-gray-600 p {
-      font-size: 7pt !important; /* Reduced */
+      font-size: 6pt !important; /* Reduced */
       color: #4b5563 !important;
+      margin-top: 2px !important;
     }
     
     /* --- LAYOUT --- */
     .grid {
-      gap: 0.5rem 1rem !important; /* Reduced y-gap */
+      gap: 0.25rem 0.75rem !important; /* Reduced y-gap */
     }
     .mt-6.border-t {
-      margin-top: 0.75rem !important; /* Reduced */
-      padding-top: 0.75rem !important; /* Reduced */
+      margin-top: 0.5rem !important; /* Reduced */
+      padding-top: 0.5rem !important; /* Reduced */
     }
 
     /* --- FORM ELEMENTS --- */
     input, select {
       border: 1px solid #d1d5db !important;
-      padding: 3px 5px !important; /* Reduced padding */
-      font-size: 8pt !important; /* Reduced */
+      padding: 2px 4px !important; /* Reduced padding */
+      font-size: 7pt !important; /* Reduced */
       margin-top: 0 !important;
     }
     input[readonly] {
       background-color: #f9fafb !important;
       color: #374151 !important;
+      font-weight: 600 !important;
     }
 
     /* --- TABLE --- */
     table {
       width: 100%;
       border-collapse: collapse !important;
+      table-layout: fixed; /* Force table to fit width */
     }
     /* Override all Tailwind padding/font classes in table */
     thead th, tbody td {
-      padding: 4px 6px !important; /* Reduced padding */
-      font-size: 8pt !important; /* Reduced */
+      padding: 3px 5px !important; /* Reduced padding */
+      font-size: 7pt !important; /* Reduced */
       border: 1px solid #d1d5db !important;
       vertical-align: top;
+      word-wrap: break-word; /* Wrap long text */
     }
     thead th {
-      font-size: 7pt !important; /* Reduced */
-      font-weight: 600 !important;
+      font-size: 6pt !important; /* Reduced */
+      font-weight: 700 !important;
       text-transform: uppercase !important;
       background-color: #f9fafb !important;
     }
     /* Make table inputs blend a bit better */
     table input, table select {
-      padding: 3px 5px !important;
-      font-size: 8pt !important; /* Reduced */
+      padding: 2px 4px !important;
+      font-size: 7pt !important; /* Reduced */
+      width: 100%;
+      box-sizing: border-box;
     }
+    /* Force table columns to shrink */
+    th:nth-child(1) { width: 4%; }
+    th:nth-child(2) { width: 12%; }
+    th:nth-child(3) { width: 13%; }
+    th:nth-child(4) { width: 11%; }
+    th:nth-child(5) { width: 10%; }
+    th:nth-child(6) { width: 18%; }
+    th:nth-child(7) { width: 12%; }
+    th:nth-child(8) { width: 20%; }
+
 
     /* --- FOOTER --- */
     footer {
       display: block !important;
       text-align: center !important;
-      margin-top: 1rem !important; /* Reduced */
+      margin-top: 0.5rem !important; /* Reduced */
       padding-top: 0.25rem !important; /* Reduced */
       border-top: 1px solid #e5e7eb;
-      font-size: 7pt !important; /* Reduced */
+      font-size: 6pt !important; /* Reduced */
       color: #374151 !important;
+    }
+    
+    /* Remove screen-specific layout helpers */
+    .overflow-x-auto, .shadow, .ring-1, .md\:rounded-lg {
+        overflow: visible !important;
+        box-shadow: none !important;
+        ring: 0 !important;
+    }
+    .min-w-full {
+        min-width: 100% !important;
     }
   }
 </style>
@@ -247,7 +276,7 @@
                     <th scope="col" class="px-3 py-3.5 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Date</th>
                     <th scope="col" class="px-3 py-3.5 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Fill Volume Rule</th>
                     <th scope="col" class="px-3 py-3.5 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Total Fill (mL)</th>
-                    <th scope="col" class="px-3 py-3.5 text-left text-xs font-medium uppercase tracking-wider text-gray-s500">Dextrose %</th>
+                    <th scope="col" class="px-3 py-3.5 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Dextrose %</th>
                     <!-- Renamed Column -->
                     <th scope="col" class="px-3 py-3.5 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Medications</th>
                     <th scope="col" class="px-3 py-3.5 text-left text-xs font-medium uppercase tracking-wider text-gray-500">Dosage</th>
@@ -293,7 +322,7 @@
   
   <!-- B. Antifungal Agents -->
   <option value="Amphotericin B"></option>
-  <option value="Fluconazole"></option> <!-- Corrected typo here -->
+  <option value="Fluconazole"></option>
   
   <!-- C. Anticoagulant -->
   <option value="Heparin"></option>
