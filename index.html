@@ -2,7 +2,7 @@
 <html lang="en" class="text-gray-900 bg-gray-100">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale-1" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Pediatric Acute Intermittent PD – 5-Day Plan (Editable)</title>
 <!-- Loading Tailwind CSS from CDN -->
 <script src="https://cdn.tailwindcss.com"></script>
@@ -103,13 +103,28 @@
       padding-top: 0.5rem !important; /* Reduced */
     }
 
-    /* --- FORM ELEMENTS --- */
+    /* --- FORM ELEMENTS (Global Print Style) --- */
     input, select {
       border: 1px solid #d1d5db !important;
       padding: 2px 4px !important; /* Reduced padding */
       font-size: 7pt !important; /* Reduced */
       margin-top: 0 !important;
+      /* UPDATED: Remove default browser styling (arrows/icons) */
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
     }
+    
+    /* UPDATED: Specifically hide date/time/number picker icons */
+    input[type="date"]::-webkit-calendar-picker-indicator,
+    input[type="datetime-local"]::-webkit-calendar-picker-indicator,
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+        display: none !important;
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
     input[readonly] {
       background-color: #f9fafb !important;
       color: #374151 !important;
@@ -344,7 +359,7 @@
   <option value="Piperacillin–Tazobactam"></option>
   
   <!-- B. Antifungal Agents -->
-  <option value="Amphotericin B"></option>
+  <option value*="Amphotericin B"></option>
   <option value="Fluconazole"></option>
   
   <!-- C. Anticoagulant -->
